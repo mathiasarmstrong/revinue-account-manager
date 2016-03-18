@@ -1,7 +1,7 @@
 export function routerConfig ($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider.state('analyticsCore', {
-    url:'/',
+    url:'',
     abstract:true,
     templateUrl:'example/home.html',
     controller: 'revinueaccountmanagementExampleController',

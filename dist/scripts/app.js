@@ -266,7 +266,7 @@
 
 	  $stateProvider.state('revinueaccountmanagement', {
 	    parent: 'analyticsCore',
-	    url: '',
+	    url: '/',
 	    controller: 'revinueaccountmanagementMainController',
 	    controllerAs: 'main',
 	    templateUrl: 'lib/main.html'
