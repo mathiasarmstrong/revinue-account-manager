@@ -1,0 +1,7 @@
+dependencies:
+  post:
+    - bower install
+general:
+  branches:
+    ignore:
+      - gh-pages
