@@ -1,0 +1,80 @@
+{
+  "_args": [
+    [
+      "import-glob@^1.3.0",
+      "/Users/jered/code/ampush/dev/frontend/aui-components/kpi"
+    ]
+  ],
+  "_from": "import-glob@>=1.3.0 <2.0.0",
+  "_id": "import-glob@1.3.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/import-glob",
+  "_nodeVersion": "4.2.1",
+  "_npmUser": {
+    "email": "terpiljenya@gmail.com",
+    "name": "terpiljenya"
+  },
+  "_npmVersion": "2.14.7",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "import-glob",
+    "raw": "import-glob@^1.3.0",
+    "rawSpec": "^1.3.0",
+    "scope": null,
+    "spec": ">=1.3.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#DEV:/"
+  ],
+  "_resolved": "https://registry.npmjs.org/import-glob/-/import-glob-1.3.0.tgz",
+  "_shasum": "487392dbca5dc076f1ca13c26496cbd392a1cd46",
+  "_shrinkwrap": null,
+  "_spec": "import-glob@^1.3.0",
+  "_where": "/Users/jered/code/ampush/dev/frontend/aui-components/kpi",
+  "author": {
+    "name": "Terpil Jenya",
+    "url": "https://github.com/terpiljenya"
+  },
+  "bugs": {
+    "url": "https://github.com/terpiljenya/import-glob/issues"
+  },
+  "dependencies": {
+    "glob": "^5.0.13"
+  },
+  "description": "ES6 import with glob patterns (preloader for Webpack)",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "487392dbca5dc076f1ca13c26496cbd392a1cd46",
+    "tarball": "http://registry.npmjs.org/import-glob/-/import-glob-1.3.0.tgz"
+  },
+  "gitHead": "8eade3a5e27c12d815077783defb71309b898949",
+  "homepage": "https://github.com/terpiljenya/import-glob#readme",
+  "keywords": [
+    "es6",
+    "glob",
+    "loader",
+    "webpack"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "terpiljenya",
+      "email": "terpiljenya@gmail.com"
+    }
+  ],
+  "name": "import-glob",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/terpiljenya/import-glob.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.3.0"
+}

@@ -1,0 +1,11 @@
+.package-item
+    button.package-name.btn.btn-default(ng-click="main.accountClick(account)")
+      a.text-info(title="Open Account")
+        strong {{ ::account.name }}
+    button.btn.btn-info(ng-click="main.goToComponent(package)")
+      i.text-white.fa.fa-external-link
+    button.btn.btn-danger(title="remove component"
+      ng-click="main.removePackageButtonClick(package.name)")
+      i.fa.fa-times.text-white
+
+

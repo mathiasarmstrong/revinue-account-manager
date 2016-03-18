@@ -1,0 +1,8 @@
+.dropdown-search
+  span.search-icon(ng-if="!main.searching && !main.searchTerm")
+    i.fa.fa-lg.fa-search
+  input.form-control(ng-model="main.searchTerm"
+    ng-focus="main.searching=true"
+    ng-blur="main.searching=false")
+  button.btn.btn-info(ng-click="main.addPackageButtonClick()")
+    i.fa.fa-plus

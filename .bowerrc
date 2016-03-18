@@ -1,0 +1,8 @@
+{
+  "directory": "bower_components",
+  "registry": {
+    "search": ["http://bower.ampush1.com:6692", "https://bower.herokuapp.com"],
+    "register": "http://bower.ampush1.com:6692"
+  },
+  "timeout": 60000
+}

@@ -1,0 +1,24 @@
+{
+  "generator-bower-template": {
+    "version": "1.2.4",
+    "props": {
+      "componentType": "pageView",
+      "angularVersion": "~1.5",
+      "angularModules": [],
+      "resource": {
+        "key": "$http",
+        "module": null
+      },
+      "bootstrapComponents": {
+        "key": "ui-bootstrap",
+        "module": "ui.bootstrap"
+      },
+      "paths": {
+        "src": "src",
+        "dist": "dist",
+        "e2e": "e2e",
+        "tmp": ".tmp"
+      }
+    }
+  }
+}

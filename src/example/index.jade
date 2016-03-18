@@ -1,0 +1,52 @@
+doctype html
+html( ng-app="revinue.account.management.example" ng-strict-di)
+  head
+    meta(charset="utf-8")
+    title revinue.account.management
+    meta(name="description" content="")
+    meta(name="viewport" content="width=device-width")
+    link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js")
+    !='\n'
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp, src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp, src}) styles/app.css -->
+    <!-- inject:main:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- end:main:css -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp, src}) styles/example.css -->
+    <!-- inject:example:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- end:example:css -->
+    <!-- endbuild -->
+    !='\n'
+  body
+    div(ui-view)
+    !='\n'
+    <!-- build:js({.tmp, src}) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp, src}) scripts/app.js -->
+    <!-- inject:main:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- end:main:js -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp, src}) scripts/example.js -->
+    <!-- inject:example:js -->
+    <!-- example js files will be automatically insert here -->
+    <!-- end:example:js -->
+
+    <!-- endbuild -->
+    !='\n'

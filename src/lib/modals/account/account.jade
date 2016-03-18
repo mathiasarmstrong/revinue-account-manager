@@ -1,0 +1,8 @@
+article.account-article
+  h3 {{account.name}}
+  form
+    section.account-section(ng-repeat="section in account.sections")
+      div(ng-repeat="(key, info) in account[section]")
+        div(ng-if='section ==="editable"')
+          label {{key}}
+            input.form-control(ng-model='info')

@@ -1,0 +1,39 @@
+{
+  "name": "revinue.account.management",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "angular-ui-router": "~0.2.15",
+    "aui-core": "latest",
+    "moment": "~2.10.6",
+    "animate.css": "~3.4.0",
+    "angular": "~1.5",
+    "angular-bootstrap": "~0.14",
+    "angular-highlightjs": "^0.5.1",
+    "ui-select": "angular-ui-select#^0.16.0",
+    "angular-schema-form": "^0.8.12"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.5"
+  },
+  "resolutions": {
+    "angular": "~1.5"
+  },
+  "main": [
+    "./dist/scripts/app.js",
+    "./dist/styles/app.css"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "gulp",
+    "package.json",
+    "e2e",
+    "gulpfile.js",
+    "karma.conf.js",
+    "protractor.conf.js"
+  ]
+}
