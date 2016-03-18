@@ -1,6 +1,30 @@
 export default class AccountController {
   constructor($account, $scope) {
     'ngInject';
+   this.schema = {
+      type: "object",
+      properties: {
+        name: {
+          type: "string",
+          minLength: 2,
+          title: "Name"
+        },
+        title: {
+          type: "string",
+          enum: ['dr','jr','sir','mrs','mr','NaN','dj']
+        }
+      }
+    };
+
+    this.form = [
+      {
+        key:"name",
+        feedback: "{ 'glyphicon': false }"
+      }
+    ];
+
+    this.model = {};
+
     $account.sections = ['static', 'editable', 'long']
     $account.static = {
       "id":'test',

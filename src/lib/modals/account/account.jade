@@ -1,8 +1,28 @@
 article.account-article
   h3 {{account.name}}
+  div.account-values
+    strong(ng-click="static = !static; long=false;") Static Values&nbsp;
+      i.fa.fa-chevron-down(ng-if="static")
+      i.fa.fa-chevron-up(ng-if="!static")
+    strong(ng-click="long = !long; static=false;") Notes&nbsp;
+      i.fa.fa-chevron-down(ng-if="long")
+      i.fa.fa-chevron-up(ng-if="!long")
+  div.static-values(ng-if="static")
+    small(ng-repeat="(key, val) in account.static")
+      strong {{key}}
+      br
+      |{{val}} &nbsp;
+  div.long-values(ng-if="long")
+    small(ng-repeat="(key, val) in account.long")
+      strong {{key}}
+      br
+      |{{val}} &nbsp;
   form
-    section.account-section(ng-repeat="section in account.sections")
-      div(ng-repeat="(key, info) in account[section]")
-        div(ng-if='section ==="editable"')
-          label {{key}}
-            input.form-control(ng-model='info')
+    .change-values
+      section.account-column(sf-schema='accountCtrl.schema'
+        sf-form ="accountCtrl.form"
+        sf-model='accountCtrl.model')
+    section.button-bar
+      button.btn.btn-warning(type='reset') Reset
+      button.btn.btn-info(type='submit') Submit
+
