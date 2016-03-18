@@ -2,7 +2,7 @@ export function routerConfig ($stateProvider) {
   'ngInject';
 
   $stateProvider.state('revinueaccountmanagement', {
-    parent: 'ampCore',
+    parent: 'analyticsCore',
     url:'',
     controller: 'revinueaccountmanagementMainController',
     controllerAs: 'main',
