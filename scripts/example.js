@@ -88,7 +88,7 @@
 	function routerConfig($stateProvider, $urlRouterProvider) {
 	  'ngInject';
 
-	  $stateProvider.state('ampCore', {
+	  $stateProvider.state('analyticsCore', {
 	    url: '/',
 	    abstract: true,
 	    templateUrl: 'example/home.html',
