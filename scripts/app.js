@@ -148,7 +148,7 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -159,12 +159,15 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var AccountController = function () {
-	  AccountController.$inject = ["$account", "$scope"];
-	  function AccountController($account, $scope) {
+	  AccountController.$inject = ["$http", "$account", "$scope"];
+	  function AccountController($http, $account, $scope) {
 	    'ngInject';
 
 	    _classCallCheck(this, AccountController);
 
+	    $http.get('/accounts').then(function (data) {
+	      console.log(data);
+	    });
 	    this.schema = {
 	      type: "object",
 	      properties: {
@@ -241,7 +244,7 @@
 	  }
 
 	  _createClass(AccountController, [{
-	    key: "createSections",
+	    key: 'createSections',
 	    value: function createSections() {}
 	  }]);
 
