@@ -1,7 +1,9 @@
 {
   "name": "revinue.account.management",
-  "version": "0.0.4",
-  "dependencies": {},
+  "version": "0.0.5",
+  "dependencies": {
+    "koa": "^1.2.0"
+  },
   "scripts": {
     "test": "karma start",
     "regenerate-changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
