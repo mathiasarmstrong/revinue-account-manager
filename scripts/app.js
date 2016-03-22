@@ -172,7 +172,7 @@
 	    _classCallCheck(this, AccountController);
 
 	    $http.get("/account/" + $account.id).then(function (data) {
-	      console.log(data.data.account);
+	      // console.log(data.data.account)
 	    });
 
 	    this.schema = {
