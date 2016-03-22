@@ -89,6 +89,8 @@
 	  function MainController($http, $uibModal, $scope) {
 	    'ngInject';
 
+	    var _this = this;
+
 	    _classCallCheck(this, MainController);
 
 	    var _arguments = Array.prototype.slice.call(arguments);
@@ -97,7 +99,11 @@
 	    _$uibModal = _arguments[1];
 	    _$scope = _arguments[2];
 
-	    this.accounts = [{ name: 'test' }];
+	    this.accounts = [];
+	    $http.get('/accounts').then(function (data) {
+	      _this.accounts = data.data.account;
+	      $scope.$applyAsync();
+	    });
 	  }
 
 	  _createClass(MainController, [{
@@ -148,7 +154,7 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -165,9 +171,10 @@
 
 	    _classCallCheck(this, AccountController);
 
-	    $http.get('/accounts').then(function (data) {
-	      console.log(data);
+	    $http.get("/account/" + $account.id).then(function (data) {
+	      console.log(data.data.account);
 	    });
+
 	    this.schema = {
 	      type: "object",
 	      properties: {
@@ -244,7 +251,7 @@
 	  }
 
 	  _createClass(AccountController, [{
-	    key: 'createSections',
+	    key: "createSections",
 	    value: function createSections() {}
 	  }]);
 
