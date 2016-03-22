@@ -1,10 +1,10 @@
 export default class AccountController {
   constructor($http, $account, $scope) {
     'ngInject';
+    $http.get(`/account/${$account.id}`).then((data)=>{
+      // console.log(data.data.account)
+    });
 
-  $http.get('/accounts').then((data)=>{
-    console.log(data)
-  });
   this.schema = {
       type: "object",
       properties: {

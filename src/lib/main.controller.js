@@ -3,7 +3,11 @@ export default class MainController {
   constructor ($http, $uibModal, $scope) {
     'ngInject';
     [_$http, _$uibModal, _$scope] = arguments;
-    this.accounts = [{name:'test'}]
+    this.accounts = [];
+    $http.get('/accounts').then((data)=>{
+      this.accounts = data.data.account;
+      $scope.$applyAsync();
+    });
   }
   accountClick(account){
     this.dialog = _$uibModal.open({
