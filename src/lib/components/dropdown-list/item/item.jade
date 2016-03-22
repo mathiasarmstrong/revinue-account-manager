@@ -1,0 +1,9 @@
+.package-item
+    button.package-name.btn.btn-default(ng-click="view({ account:item })")
+      a.text-info(title="Open Account")
+        strong {{ ::item.name }}
+    button.btn.btn-danger(title="remove component"
+      ng-click="remove({ account:item })")
+      i.fa.fa-times.text-white
+
+

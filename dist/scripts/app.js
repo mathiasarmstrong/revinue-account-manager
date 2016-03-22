@@ -56,11 +56,23 @@
 
 	var _account2 = _interopRequireDefault(_account);
 
-	var _main4 = __webpack_require__(8);
+	var _account3 = __webpack_require__(8);
+
+	var _account4 = _interopRequireDefault(_account3);
+
+	var _main4 = __webpack_require__(9);
+
+	var _dropdownSearch = __webpack_require__(10);
+
+	var _dropdownSearch2 = _interopRequireDefault(_dropdownSearch);
+
+	var _dropdownList = __webpack_require__(11);
+
+	var _dropdownList2 = _interopRequireDefault(_dropdownList);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	angular.module('revinue.account.management', ['schemaForm', 'ui.select', 'ui.router', 'ui.bootstrap']).config(_main3.providerConfig).config(_main4.routerConfig).controller('revinueaccountmanagementMainController', _main2.default).controller('accountController', _account2.default);
+	angular.module('revinue.account.management', ['schemaForm', 'ui.select', 'ui.router', 'ui.bootstrap']).config(_main3.providerConfig).config(_main4.routerConfig).controller('revinueaccountmanagementMainController', _main2.default).controller('accountController', _account2.default).controller('createAccountController', _account4.default).directive('dropdownSearch', _dropdownSearch2.default).directive('dropdownList', _dropdownList2.default);
 
 /***/ },
 /* 1 */,
@@ -100,9 +112,10 @@
 	    _$scope = _arguments[2];
 
 	    this.accounts = [];
-	    $http.get('/accounts').then(function (data) {
-	      _this.accounts = data.data.account;
-	      $scope.$applyAsync();
+	    $http.get('/api/accounts').then(function (data) {
+	      data.data.account.forEach(function (account) {
+	        _this.accounts.push(account);
+	      });
 	    });
 	  }
 
@@ -120,6 +133,18 @@
 	            return account;
 	          }
 	        },
+	        scope: _$scope
+	      });
+	    }
+	  }, {
+	    key: 'addButtonClick',
+	    value: function addButtonClick() {
+	      this.dialog = _$uibModal.open({
+	        animation: true,
+	        templateUrl: 'lib/modals/create/account.html',
+	        controller: 'createAccountController',
+	        controllerAs: 'create',
+	        size: 'lg',
 	        scope: _$scope
 	      });
 	    }
@@ -169,10 +194,15 @@
 	  function AccountController($http, $account, $scope) {
 	    'ngInject';
 
+	    var _this = this;
+
 	    _classCallCheck(this, AccountController);
 
-	    $http.get("/account/" + $account.id).then(function (data) {
-	      // console.log(data.data.account)
+	    this.platformInfo = [];
+	    $http.get("/api/account/" + $account.id).then(function (data) {
+	      _.forEach(data.data.account, function (plat) {
+	        _this.platformInfo.push(plat);
+	      });
 	    });
 
 	    this.schema = {
@@ -264,6 +294,50 @@
 /* 8 */
 /***/ function(module, exports) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var AccountController = function AccountController() {
+	  'ngInject';
+
+	  _classCallCheck(this, AccountController);
+
+	  this.platformInfo = [];
+
+	  this.schema = {
+	    type: "object",
+	    properties: {
+	      clientName: {
+	        type: "string",
+	        minLength: 2,
+	        title: "Client Name"
+	      },
+	      title: {
+	        type: "string",
+	        enum: ['dr', 'jr', 'sir', 'mrs', 'mr', 'NaN', 'dj']
+	      }
+	    }
+	  };
+
+	  this.form = [{
+	    key: "clientName",
+	    feedback: "{ 'glyphicon': false }"
+
+	  }];
+	  this.model = {};
+	};
+
+	exports.default = AccountController;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
 	'use strict';
 
 	routerConfig.$inject = ["$stateProvider"];
@@ -283,10 +357,58 @@
 	  });
 	}
 
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var dropdownSearch = function dropdownSearch() {
+	  'ngInject';
+
+	  return {
+	    templateUrl: 'lib/components/dropdown-search/dropdown-search.html',
+	    scope: {
+	      add: '&',
+	      search: '='
+	    }
+	  };
+	};
+	exports.default = dropdownSearch;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var dropdownList = function dropdownList() {
+	  'ngInject';
+
+	  return {
+	    templateUrl: 'lib/components/dropdown-list/dropdown-list.html',
+	    scope: {
+	      view: '&',
+	      list: '=',
+	      search: '=',
+	      error: '='
+	    }
+	  };
+	};
+	exports.default = dropdownList;
+
 /***/ }
 /******/ ]);
-angular.module("revinue.account.management").run(["$templateCache", function($templateCache) {$templateCache.put("lib/main.html","<div id=\"wrap\" class=\"amp-bower-container\"><div class=\"jumbotron amp-bower animated fadeInDown\"><h1>Revinue Manager</h1><div ng-include=\"\'lib/components/dropdown-search/dropdown-search.html\'\" class=\"search-container\"></div></div><div class=\"container animated fadeInUp\"><div ng-if=\"main.accounts &amp;&amp; main.accounts.length || main.searchTerm\" class=\"component-list\"><div ng-repeat=\"account in main.accounts | filter : { name:main.searchTerm }\" class=\"account\"><div ng-include=\"\'lib/components/dropdown-search/item/item.html\'\"></div></div><div class=\"extra-item\"></div><div class=\"extra-item\"></div></div><div ng-if=\"main.error\" class=\"bg-danger info-box\"><i class=\"fa fa-exclamation-triangle\"></i>Service is down</div><div ng-if=\"main.accounts &amp;&amp; !main.accounts.length\" class=\"bg-warning info-box\"><i class=\"fa fa-info-circle\"></i>No private accounts registered</div><div ng-if=\"!main.accounts\" class=\"bg-info info-box\"><i class=\"fa fa-pulse fa-spinner\"></i>Loading Packages...</div></div></div>");
-$templateCache.put("lib/components/dropdown-search/dropdown-search.html","<div class=\"dropdown-search\"><span ng-if=\"!main.searching &amp;&amp; !main.searchTerm\" class=\"search-icon\"><i class=\"fa fa-lg fa-search\"></i></span><input ng-model=\"main.searchTerm\" ng-focus=\"main.searching=true\" ng-blur=\"main.searching=false\" class=\"form-control\"/><button ng-click=\"main.addPackageButtonClick()\" class=\"btn btn-info\"><i class=\"fa fa-plus\"></i></button></div>");
-$templateCache.put("lib/modals/account/account.html","<article class=\"account-article\"><h3>{{account.name}}</h3><div class=\"account-values\"><strong ng-click=\"static = !static; long=false;\">Static Values&nbsp;<i ng-if=\"static\" class=\"fa fa-chevron-down\"></i><i ng-if=\"!static\" class=\"fa fa-chevron-up\"></i></strong><strong ng-click=\"long = !long; static=false;\">Notes&nbsp;<i ng-if=\"long\" class=\"fa fa-chevron-down\"></i><i ng-if=\"!long\" class=\"fa fa-chevron-up\"></i></strong></div><div ng-if=\"static\" class=\"static-values\"><small ng-repeat=\"(key, val) in account.static\"><strong>{{key}}</strong><br/>{{val}} &nbsp;</small></div><div ng-if=\"long\" class=\"long-values\"><small ng-repeat=\"(key, val) in account.long\"><strong>{{key}}</strong><br/>{{val}} &nbsp;</small></div><form><div class=\"change-values\"><section sf-schema=\"accountCtrl.schema\" sf-form=\"accountCtrl.form\" sf-model=\"accountCtrl.model\" class=\"account-column\"></section></div><section class=\"button-bar\"><button type=\"reset\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form></article>");
-$templateCache.put("lib/components/dropdown-search/item/item.html","<div class=\"package-item\"><button ng-click=\"main.accountClick(account)\" class=\"package-name btn btn-default\"><a title=\"Open Account\" class=\"text-info\"><strong>{{ ::account.name }}</strong></a></button><button ng-click=\"main.goToComponent(package)\" class=\"btn btn-info\"><i class=\"text-white fa fa-external-link\"></i></button><button title=\"remove component\" ng-click=\"main.removePackageButtonClick(package.name)\" class=\"btn btn-danger\"><i class=\"fa fa-times text-white\"></i></button></div>");}]);
+angular.module("revinue.account.management").run(["$templateCache", function($templateCache) {$templateCache.put("lib/main.html","<div id=\"wrap\" class=\"amp-bower-container\"><div class=\"jumbotron amp-bower animated fadeInDown\"><h1>Revenue Manager</h1><div class=\"search-container\"><dropdown-search search=\"main.searchTerm\" add=\"main.addButtonClick()\"></dropdown-search></div></div><dropdown-list list=\"main.accounts\" search=\"main.searchTerm\" view=\"main.accountClick(account)\" remove=\"main.removeAccount(account)\" error=\"main.error\"></dropdown-list></div>");
+$templateCache.put("lib/components/dropdown-list/dropdown-list.html","<div class=\"container animated fadeInUp\"><div ng-if=\"list &amp;&amp; list.length || search\" class=\"component-list\"><div ng-repeat=\"item in list | filter : { name:search }\" class=\"account\"><div ng-include=\"\'lib/components/dropdown-list/item/item.html\'\"></div></div><div class=\"exra-item\"></div><div class=\"exra-item\"></div></div><div ng-if=\"error\" class=\"bg-danger info-box\"><i class=\"fa fa-exclamation-triangle\"></i> Service is down</div><div ng-if=\"list &amp;&amp; !list.length\" class=\"bg-warning info-box\"><i class=\"fa fa-info-circle\"></i> None found</div><div ng-if=\"!list\" class=\"bg-info info-box\"><i class=\"fa fa-pulse fa-spinner\"></i> Loading Packages...</div></div>");
+$templateCache.put("lib/components/dropdown-search/dropdown-search.html","<div class=\"dropdown-search\"><span ng-if=\"!searching &amp;&amp; !search\" class=\"search-icon\"><i class=\"fa fa-lg fa-search\"></i></span><input ng-model=\"search\" ng-focus=\"searching=true\" ng-blur=\"searching=false\" class=\"form-control\"/><button ng-click=\"add()\" class=\"btn btn-info\"><i class=\"fa fa-plus\"></i></button></div>");
+$templateCache.put("lib/modals/account/account.html","<article class=\"account-article\"><div class=\"platform-icons\"><h3 class=\"account-name\"><i class=\"fa fa-plus-square text-info\"></i> {{account.name}}</h3><h3 ng-repeat=\"platform in accountCtrl.platformInfo\"><i class=\"fa fa-{{platform.platform}}\"></i></h3></div><div class=\"account-values\"><strong ng-click=\"static = !static; long=false;\">Static Values&nbsp;<i ng-if=\"static\" class=\"fa fa-chevron-down\"></i><i ng-if=\"!static\" class=\"fa fa-chevron-up\"></i></strong><strong ng-click=\"long = !long; static=false;\">Notes&nbsp;<i ng-if=\"long\" class=\"fa fa-chevron-down\"></i><i ng-if=\"!long\" class=\"fa fa-chevron-up\"></i></strong></div><div ng-if=\"static\" class=\"static-values\"><small ng-repeat=\"(key, val) in account.static\"><strong>{{key}}</strong><br/>{{val}} &nbsp;</small></div><div ng-if=\"long\" class=\"long-values\"><small ng-repeat=\"(key, val) in account.long\"><strong>{{key}}</strong><br/>{{val}} &nbsp;</small></div><form><div class=\"change-values\"><section sf-schema=\"accountCtrl.schema\" sf-form=\"accountCtrl.form\" sf-model=\"accountCtrl.model\" class=\"account-column\"></section></div><section class=\"button-bar\"><button type=\"reset\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form></article>");
+$templateCache.put("lib/modals/create/account.html","<article class=\"account-article\"><form><div class=\"change-values\"><section sf-schema=\"create.schema\" sf-form=\"create.form\" sf-model=\"create.model\" class=\"account-column\"></section></div><section class=\"button-bar\"><button type=\"reset\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form></article>");
+$templateCache.put("lib/components/dropdown-list/item/item.html","<div class=\"package-item\"><button ng-click=\"view({ account:item })\" class=\"package-name btn btn-default\"><a title=\"Open Account\" class=\"text-info\"><strong>{{ ::item.name }}</strong></a></button><button title=\"remove component\" ng-click=\"remove({ account:item })\" class=\"btn btn-danger\"><i class=\"fa fa-times text-white\"></i></button></div>");}]);
 //# sourceMappingURL=../maps/scripts/app.js.map

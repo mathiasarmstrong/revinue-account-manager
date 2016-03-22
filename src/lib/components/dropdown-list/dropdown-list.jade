@@ -1,0 +1,18 @@
+.container.animated.fadeInUp
+  .component-list(ng-if="list && list.length || search")
+    .account(ng-repeat="item in list | filter : { name:search }")
+      div(ng-include="'lib/components/dropdown-list/item/item.html'")
+    .exra-item
+    .exra-item
+    .exra-item
+    .exra-item
+  .bg-danger.info-box(ng-if="error")
+      i.fa.fa-exclamation-triangle
+      |  Service is down
+  .bg-warning.info-box(ng-if="list && !list.length")
+    i.fa.fa-info-circle
+    |  None found
+  .bg-info.info-box(ng-if="!list")
+    i.fa.fa-pulse.fa-spinner
+    |  Loading Packages...
+

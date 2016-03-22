@@ -1,19 +1,4 @@
-.component-list{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    flex-wrap:wrap;
-    overflow-y:scroll;
-    &>*{
-        flex:1 0 0%;
-        margin:5px;
-        min-height: 2.5em;
-        width: 95%;
-    }
-}
+
 .package.ng-enter {
     -webkit-animation: fadeInRight 0.25s;
     -moz-animation: fadeInRight 0.25s;

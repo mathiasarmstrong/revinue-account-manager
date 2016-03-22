@@ -1,19 +1,11 @@
 .amp-bower-container#wrap
   .jumbotron.amp-bower.animated.fadeInDown
-    h1 Revinue Manager
-    .search-container(ng-include="'lib/components/dropdown-search/dropdown-search.html'")
-  .container.animated.fadeInUp
-    .component-list(ng-if="main.accounts && main.accounts.length || main.searchTerm")
-      .account(ng-repeat="account in main.accounts | filter : { name:main.searchTerm }")
-        div(ng-include="'lib/components/dropdown-search/item/item.html'")
-      .extra-item
-      .extra-item
-    .bg-danger.info-box(ng-if="main.error")
-        i.fa.fa-exclamation-triangle
-        | Service is down
-    .bg-warning.info-box(ng-if="main.accounts && !main.accounts.length")
-      i.fa.fa-info-circle
-      | No private accounts registered
-    .bg-info.info-box(ng-if="!main.accounts")
-      i.fa.fa-pulse.fa-spinner
-      | Loading Packages...
+    h1 Revenue Manager
+    .search-container
+      dropdown-search(search="main.searchTerm"
+        add="main.addButtonClick()")
+  dropdown-list(list="main.accounts"
+    search="main.searchTerm"
+    view="main.accountClick(account)"
+    remove="main.removeAccount(account)"
+    error="main.error")

@@ -1,8 +1,11 @@
 export default class AccountController {
   constructor($http, $account, $scope) {
     'ngInject';
-    $http.get(`/account/${$account.id}`).then((data)=>{
-      // console.log(data.data.account)
+    this.platformInfo =[];
+    $http.get(`/api/account/${$account.id}`).then((data)=>{
+      _.forEach(data.data.account,(plat)=>{
+        this.platformInfo.push(plat);
+      })
     });
 
   this.schema = {

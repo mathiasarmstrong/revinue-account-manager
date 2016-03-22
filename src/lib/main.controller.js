@@ -4,9 +4,10 @@ export default class MainController {
     'ngInject';
     [_$http, _$uibModal, _$scope] = arguments;
     this.accounts = [];
-    $http.get('/accounts').then((data)=>{
-      this.accounts = data.data.account;
-      $scope.$applyAsync();
+    $http.get('/api/accounts').then((data)=>{
+      data.data.account.forEach((account)=>{
+        this.accounts.push(account)
+      })
     });
   }
   accountClick(account){
@@ -21,6 +22,16 @@ export default class MainController {
           return account;
         }
       },
+      scope:_$scope
+    });
+  }
+  addButtonClick(){
+   this.dialog = _$uibModal.open({
+      animation: true,
+      templateUrl: 'lib/modals/create/account.html',
+      controller:'createAccountController',
+      controllerAs:'create',
+      size: 'lg',
       scope:_$scope
     });
   }

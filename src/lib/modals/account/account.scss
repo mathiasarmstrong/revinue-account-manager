@@ -5,6 +5,14 @@ article.account-article{
     flex-direction:column;
   }
 }
+.platform-icons{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  .account-name{
+    flex:1 1 0%;
+  }
+}
 .button-bar{
   display:flex;
   justify-content:flex-end;
@@ -32,3 +40,6 @@ article.account-article{
   display:flex;
   justify-content:space-around;
 }
+
+
+
