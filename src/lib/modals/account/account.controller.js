@@ -14,11 +14,11 @@ export default class AccountController {
         name: {
           type: "string",
           minLength: 2,
-          title: "Name"
+          title: "platform name"
         },
-        title: {
+        platform: {
           type: "string",
-          enum: ['dr','jr','sir','mrs','mr','NaN','dj']
+          enum: ['facebook','pinterest','twitter']
         }
       }
     };
@@ -27,10 +27,15 @@ export default class AccountController {
       {
         key:"name",
         feedback: "{ 'glyphicon': false }"
+      },
+      {
+        key:"platform",
+        feedback: "{ 'glyphicon': false }"
       }
+
     ];
 
-    this.model = {};
+
 
     $account.sections = ['static', 'editable', 'long']
     $account.static = {

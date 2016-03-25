@@ -1,11 +1,15 @@
 article.account-article
   .platform-icons
     h3.account-name
-      i.fa.fa-plus-square.text-info
+      i.fa.fa-plus-square.text-info(ng-click='accountCtrl.model = {}')
       |  {{account.name}}
-    h3(ng-repeat="platform in accountCtrl.platformInfo")
+    h3.platforms(ng-repeat="platform in accountCtrl.platformInfo"
+      uib-popover="{{platform.name}}"
+      popover-trigger='mouseenter'
+      popover-placement='bottom-left'
+      ng-click='accountCtrl.model = platform')
       i.fa(class='fa-{{platform.platform}}')
-  form
+  form(ng-if='accountCtrl.model')
     .change-values
       section.account-column(sf-schema='accountCtrl.schema'
         sf-form ="accountCtrl.form"

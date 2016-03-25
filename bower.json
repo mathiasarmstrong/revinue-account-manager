@@ -11,7 +11,8 @@
     "angular-bootstrap": "~0.14",
     "angular-highlightjs": "^0.5.1",
     "ui-select": "angular-ui-select#^0.16.0",
-    "angular-schema-form": "^0.8.12"
+    "angular-schema-form": "^0.8.12",
+    "angular-schema-form-ui-select": "^0.1.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.5"
