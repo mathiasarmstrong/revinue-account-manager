@@ -56,17 +56,17 @@
 
 	var _account2 = _interopRequireDefault(_account);
 
-	var _account3 = __webpack_require__(8);
+	var _account3 = __webpack_require__(9);
 
 	var _account4 = _interopRequireDefault(_account3);
 
-	var _main4 = __webpack_require__(9);
+	var _main4 = __webpack_require__(10);
 
-	var _dropdownSearch = __webpack_require__(10);
+	var _dropdownSearch = __webpack_require__(11);
 
 	var _dropdownSearch2 = _interopRequireDefault(_dropdownSearch);
 
-	var _dropdownList = __webpack_require__(11);
+	var _dropdownList = __webpack_require__(12);
 
 	var _dropdownList2 = _interopRequireDefault(_dropdownList);
 
@@ -177,6 +177,151 @@
 
 /***/ },
 /* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _account = __webpack_require__(8);
+
+	var _account2 = _interopRequireDefault(_account);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var _$http = void 0,
+	    _$account = void 0;
+
+	var AccountController = function () {
+	  AccountController.$inject = ["$http", "$account"];
+	  function AccountController($http, $account) {
+	    'ngInject';
+
+	    _classCallCheck(this, AccountController);
+
+	    _$http = $http;
+	    _$account = $account;
+
+
+	    this.platformInfo = [];
+
+	    this.schema = { type: "object", properties: _account2.default };
+
+	    this.forms = _(_account2.default).map(function (val, key) {
+	      if (!val.hidden) return {
+	        key: key,
+	        feedback: "{ 'glyphicon': false }",
+	        order: val.order,
+	        _model: val._model
+	      };
+	    }).filter(function (val) {
+	      return val;
+	    });
+
+	    this.forms = _.groupBy(this.forms, '_model');
+
+	    this.setAccount();
+	    this.getAccountInfo();
+	  }
+
+	  _createClass(AccountController, [{
+	    key: 'setAccount',
+	    value: function setAccount() {
+	      this.account = angular.copy(_$account);
+	      delete this.platformModel;
+	    }
+	  }, {
+	    key: 'getAccountInfo',
+	    value: function getAccountInfo() {
+	      var _this = this;
+
+	      _$http.get('/api/account/' + _$account.id).then(function (data) {
+	        _.forEach(data.data.account, function (plat) {
+	          _this.platformInfo.push(plat);
+	        });
+	      });
+	    }
+	  }]);
+
+	  return AccountController;
+	}();
+
+	exports.default = AccountController;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var accountInfo = {
+	  m1_rev_goal: {
+	    title: 'Month 1 Goal',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  m1_rev_upside: {
+	    title: 'Month 1 Upside',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  m2_rev_goal: {
+	    title: 'Month 2 Goal',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  m2_rev_upside: {
+	    title: 'Month 2 Upside',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  m3_rev_goal: {
+	    title: 'Month 3 Goal',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  m3_rev_upside: {
+	    title: 'Month 3 Upside',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  quarter_goal: {
+	    title: 'Quarterly Goal',
+	    type: 'number',
+	    _model: 'account'
+	  },
+	  name: {
+	    type: "string",
+	    _model: 'platform',
+	    minLength: 2,
+	    title: "Platform Name",
+	    order: 0
+	  },
+	  platform: {
+	    title: 'Platform',
+	    type: "string",
+	    _model: 'platform',
+	    enum: ['facebook', 'pinterest', 'twitter'],
+	    order: 0
+	  },
+	  id: {
+	    hidden: true
+	  }
+	};
+
+	exports.default = accountInfo;
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -189,101 +334,45 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var AccountController = function () {
-	  AccountController.$inject = ["$http", "$account", "$scope"];
-	  function AccountController($http, $account, $scope) {
-	    'ngInject';
+	var _$http = void 0;
 
-	    var _this = this;
+	var AccountController = function () {
+	  AccountController.$inject = ["$http"];
+	  function AccountController($http) {
+	    'ngInject';
 
 	    _classCallCheck(this, AccountController);
 
+	    _$http = $http;
 	    this.platformInfo = [];
-	    $http.get("/api/account/" + $account.id).then(function (data) {
-	      _.forEach(data.data.account, function (plat) {
-	        _this.platformInfo.push(plat);
-	      });
-	    });
 
 	    this.schema = {
 	      type: "object",
 	      properties: {
-	        name: {
+	        clientName: {
 	          type: "string",
 	          minLength: 2,
-	          title: "platform name"
-	        },
-	        platform: {
-	          type: "string",
-	          enum: ['facebook', 'pinterest', 'twitter']
+	          title: "Client Name"
 	        }
 	      }
 	    };
 
 	    this.form = [{
-	      key: "name",
+	      key: "clientName",
 	      feedback: "{ 'glyphicon': false }"
-	    }, {
-	      key: "platform",
-	      feedback: "{ 'glyphicon': false }"
-	    }];
 
-	    $account.sections = ['static', 'editable', 'long'];
-	    $account.static = {
-	      "id": 'test',
-	      "Client Name": 'test',
-	      "Business Unit": 'test',
-	      "Geography": 'test',
-	      "Quarter Total Projection": 'test',
-	      "Current Month Strategist Projection": 'test',
-	      "Current Month Linear Projection": 'test',
-	      "Quarter Total Upside Case": 'test',
-	      "Feb & March - Upside vs. Base": 'test',
-	      "Total QTD Actual": 'test',
-	      "Daily QTD Average Pacing": 'test',
-	      "Quarterly Linear Projection": 'test',
-	      "Quarterly Current Projection": 'test',
-	      "Seven Day Trailing Projection": 'test',
-	      "Three Day Trailing Projection": 'test',
-	      "Pacing Required for Quarterly Goal": 'test',
-	      "Yesterday Pacing": 'test',
-	      "3 Day Trailing Pacing": 'test',
-	      "7 Day Trailing Pacing": 'test',
-	      "Pacing vs. Goal": 'test',
-	      "Actual vs. Goal": 'test',
-	      "Projected Quarterly Spend $": 'test',
-	      "Linear Monthly Spend $": 'test',
-	      "AMP Fee %": 'test',
-	      "IO End Date(s)": 'test',
-	      "master_id": 'test'
-	    };
-	    $account.editable = {
-	      'Lead': 'test',
-	      'Business Unit Head': 'test',
-	      'January Projection': 'test',
-	      'February Projection': 'test',
-	      'March Projection': 'test',
-	      'January Upside Case': 'test',
-	      'February Upside Case': 'test',
-	      'March Upside Case': 'test',
-	      'Quarter Total Goal': 'test',
-	      'Current Month Goal': 'test',
-	      'January Actual': 'test',
-	      'February Actual': 'test',
-	      'March Actual': 'test',
-	      'Month1 Fee %': 'test',
-	      'Month2 Fee %': 'test',
-	      'Month3 Fee %': 'test'
-	    };
-	    $account.long = {
-	      'Min Fee Notes (Tiers, Special Billing, etc.)': 'test'
-	    };
-	    $scope.account = $account;
+	    }];
+	    this.model = {};
 	  }
 
 	  _createClass(AccountController, [{
-	    key: "createSections",
-	    value: function createSections() {}
+	    key: "createAccount",
+	    value: function createAccount() {
+	      _$http.post('/api/account', this.model).then(function (data) {
+	        return console.log(data);
+	      });
+	      // this.model ={};
+	    }
 	  }]);
 
 	  return AccountController;
@@ -292,51 +381,7 @@
 	exports.default = AccountController;
 
 /***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var AccountController = function AccountController() {
-	  'ngInject';
-
-	  _classCallCheck(this, AccountController);
-
-	  this.platformInfo = [];
-
-	  this.schema = {
-	    type: "object",
-	    properties: {
-	      clientName: {
-	        type: "string",
-	        minLength: 2,
-	        title: "Client Name"
-	      },
-	      title: {
-	        type: "string",
-	        enum: ['dr', 'jr', 'sir', 'mrs', 'mr', 'NaN', 'dj']
-	      }
-	    }
-	  };
-
-	  this.form = [{
-	    key: "clientName",
-	    feedback: "{ 'glyphicon': false }"
-
-	  }];
-	  this.model = {};
-	};
-
-	exports.default = AccountController;
-
-/***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -359,7 +404,7 @@
 	}
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -381,7 +426,7 @@
 	exports.default = dropdownSearch;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -408,8 +453,8 @@
 /******/ ]);
 angular.module("revinue.account.management").run(["$templateCache", function($templateCache) {$templateCache.put("lib/main.html","<div id=\"wrap\" class=\"amp-bower-container\"><div class=\"jumbotron amp-bower animated fadeInDown\"><h1>Revenue Manager</h1><div class=\"search-container\"><dropdown-search search=\"main.searchTerm\" add=\"main.addButtonClick()\"></dropdown-search></div></div><dropdown-list list=\"main.accounts\" search=\"main.searchTerm\" view=\"main.accountClick(account)\" remove=\"main.removeAccount(account)\" error=\"main.error\"></dropdown-list></div>");
 $templateCache.put("lib/components/dropdown-list/dropdown-list.html","<div class=\"container animated fadeInUp\"><div ng-if=\"list &amp;&amp; list.length || search\" class=\"component-list\"><div ng-repeat=\"item in list | filter : { name:search }\" class=\"account\"><div ng-include=\"\'lib/components/dropdown-list/item/item.html\'\"></div></div><div class=\"exra-item\"></div><div class=\"exra-item\"></div><div class=\"exra-item\"></div><div class=\"exra-item\"></div></div><div ng-if=\"error\" class=\"bg-danger info-box\"><i class=\"fa fa-exclamation-triangle\"></i> Service is down</div><div ng-if=\"list &amp;&amp; !list.length\" class=\"bg-warning info-box\"><i class=\"fa fa-info-circle\"></i> None found</div><div ng-if=\"!list\" class=\"bg-info info-box\"><i class=\"fa fa-pulse fa-spinner\"></i> Loading Packages...</div></div>");
+$templateCache.put("lib/modals/account/account.html","<article class=\"account-article\"><div class=\"platform-icons\"><h3 class=\"account-name\"><i title=\"Add Platform Link\" ng-click=\"accountCtrl.platformModel = { new:true }\" class=\"fa fa-plus-square text-info\"></i> {{accountCtrl.account.name}}</h3><h3 ng-repeat=\"platform in accountCtrl.platformInfo\" uib-popover=\"{{platform.name}}\" popover-trigger=\"mouseenter\" popover-placement=\"bottom-left\" ng-click=\"accountCtrl.platformModel = platform\" class=\"platforms\"><i class=\"fa fa-{{platform.platform}}\"></i></h3></div><form><div ng-if=\"accountCtrl.platformModel\" class=\"platform-change-values\"><div class=\"close-platform\"><button title=\"Remove Platform Link\" ng-if=\"accountCtrl.platformModel &amp;&amp; !accountCtrl.platformModel.new\" class=\"btn btn-danger\"><strong>Remove</strong></button><button title=\"Close\" ng-click=\"accountCtrl.platformModel=null\" class=\"btn btn-info\"><i class=\"fa fa-close\"></i></button></div><section sf-schema=\"accountCtrl.schema\" sf-form=\"accountCtrl.forms.platform\" sf-model=\"accountCtrl.platformModel\" class=\"account-column\"></section></div><div class=\"account-change-values\"><section sf-schema=\"accountCtrl.schema\" sf-form=\"accountCtrl.forms.account\" sf-model=\"accountCtrl.account\" class=\"account-column\"></section></div><section class=\"button-bar\"><button ng-click=\"accountCtrl.setAccount()\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form></article>");
 $templateCache.put("lib/components/dropdown-search/dropdown-search.html","<div class=\"dropdown-search\"><span ng-if=\"!searching &amp;&amp; !search\" class=\"search-icon\"><i class=\"fa fa-lg fa-search\"></i></span><input ng-model=\"search\" ng-focus=\"searching=true\" ng-blur=\"searching=false\" class=\"form-control\"/><button ng-click=\"add()\" class=\"btn btn-info\"><i class=\"fa fa-plus\"></i></button></div>");
-$templateCache.put("lib/modals/account/account.html","<article class=\"account-article\"><div class=\"platform-icons\"><h3 class=\"account-name\"><i ng-click=\"accountCtrl.model = {}\" class=\"fa fa-plus-square text-info\"></i> {{account.name}}</h3><h3 ng-repeat=\"platform in accountCtrl.platformInfo\" uib-popover=\"{{platform.name}}\" popover-trigger=\"mouseenter\" popover-placement=\"bottom-left\" ng-click=\"accountCtrl.model = platform\" class=\"platforms\"><i class=\"fa fa-{{platform.platform}}\"></i></h3></div><form ng-if=\"accountCtrl.model\"><div class=\"change-values\"><section sf-schema=\"accountCtrl.schema\" sf-form=\"accountCtrl.form\" sf-model=\"accountCtrl.model\" class=\"account-column\"></section></div><section class=\"button-bar\"><button type=\"reset\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form><div class=\"account-values\"><strong ng-click=\"static = !static; long=false;\">Static Values&nbsp;<i ng-if=\"static\" class=\"fa fa-chevron-down\"></i><i ng-if=\"!static\" class=\"fa fa-chevron-up\"></i></strong><strong ng-click=\"long = !long; static=false;\">Notes&nbsp;<i ng-if=\"long\" class=\"fa fa-chevron-down\"></i><i ng-if=\"!long\" class=\"fa fa-chevron-up\"></i></strong></div><div ng-if=\"static\" class=\"static-values\"><small ng-repeat=\"(key, val) in account.static\"><strong>{{key}}</strong><br/>{{val}} &nbsp;</small></div><div ng-if=\"long\" class=\"long-values\"><small ng-repeat=\"(key, val) in account.long\"><strong>{{key}}</strong><br/>{{val}} &nbsp;</small></div></article>");
-$templateCache.put("lib/modals/create/account.html","<article class=\"account-article\"><form><div class=\"change-values\"><section sf-schema=\"create.schema\" sf-form=\"create.form\" sf-model=\"create.model\" class=\"account-column\"></section></div><section class=\"button-bar\"><button type=\"reset\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form></article>");
+$templateCache.put("lib/modals/create/account.html","<article class=\"account-article\"><form ng-submit=\"create.createAccount()\"><div class=\"change-values\"><section sf-schema=\"create.schema\" sf-form=\"create.form\" sf-model=\"create.model\" class=\"account-column\"></section></div><section class=\"button-bar\"><button type=\"reset\" class=\"btn btn-warning\">Reset</button><button type=\"submit\" class=\"btn btn-info\">Submit</button></section></form></article>");
 $templateCache.put("lib/components/dropdown-list/item/item.html","<div class=\"package-item\"><button ng-click=\"view({ account:item })\" class=\"package-name btn btn-default\"><a title=\"Open Account\" class=\"text-info\"><strong>{{ ::item.name }}</strong></a></button><button title=\"remove component\" ng-click=\"remove({ account:item })\" class=\"btn btn-danger\"><i class=\"fa fa-times text-white\"></i></button></div>");}]);
 //# sourceMappingURL=../maps/scripts/app.js.map
