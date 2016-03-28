@@ -1,5 +1,6 @@
 article.account-article{
   padding: 1rem;
+  min-height: 20vh;
   form{
     display:flex;
     flex-direction:column;
@@ -41,5 +42,28 @@ article.account-article{
   justify-content:space-around;
 }
 
+.account-change-values section{
+  display:flex;
+  flex-wrap:wrap;
+  width:100%;
+  &>*{
+    flex:1 1 0%;
+    min-width:30%;
+    margin: 0 5%;
+  }
+}
+.platform-change-values section{
+  width:100%;
+  padding:5%;
+  background-color: lightgrey;
+  margin-bottom:1em;
 
-
+}
+.close-platform{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:1em;
+  button.btn.btn-danger{
+    margin-right: 1em;
+  }
+}

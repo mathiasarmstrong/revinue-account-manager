@@ -1,6 +1,8 @@
+let _$http;
 export default class AccountController {
-  constructor() {
+  constructor($http) {
     'ngInject';
+    _$http = $http;
     this.platformInfo =[];
 
     this.schema = {
@@ -10,10 +12,6 @@ export default class AccountController {
           type: "string",
           minLength: 2,
           title: "Client Name"
-        },
-        title: {
-          type: "string",
-          enum: ['dr','jr','sir','mrs','mr','NaN','dj']
         }
       }
     };
@@ -26,5 +24,9 @@ export default class AccountController {
       }
     ];
     this.model = {};
+  }
+  createAccount(){
+    _$http.post('/api/account', this.model).then(data=>console.log(data))
+    // this.model ={};
   }
 }

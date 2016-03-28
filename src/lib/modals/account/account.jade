@@ -1,38 +1,27 @@
 article.account-article
   .platform-icons
     h3.account-name
-      i.fa.fa-plus-square.text-info(ng-click='accountCtrl.model = {}')
-      |  {{account.name}}
+      i.fa.fa-plus-square.text-info(title = "Add Platform Link" ng-click='accountCtrl.platformModel = { new:true }')
+      |  {{accountCtrl.account.name}}
     h3.platforms(ng-repeat="platform in accountCtrl.platformInfo"
       uib-popover="{{platform.name}}"
       popover-trigger='mouseenter'
       popover-placement='bottom-left'
-      ng-click='accountCtrl.model = platform')
+      ng-click='accountCtrl.platformModel = platform')
       i.fa(class='fa-{{platform.platform}}')
-  form(ng-if='accountCtrl.model')
-    .change-values
+  form
+    .platform-change-values(ng-if="accountCtrl.platformModel")
+      .close-platform
+        button.btn.btn-danger(title="Remove Platform Link" ng-if='accountCtrl.platformModel && !accountCtrl.platformModel.new') #[strong Remove]
+        button.btn.btn-info(title='Close' ng-click="accountCtrl.platformModel=null")
+          i.fa.fa-close
       section.account-column(sf-schema='accountCtrl.schema'
-        sf-form ="accountCtrl.form"
-        sf-model='accountCtrl.model')
+        sf-form ="accountCtrl.forms.platform"
+        sf-model='accountCtrl.platformModel')
+    .account-change-values
+      section.account-column(sf-schema='accountCtrl.schema'
+        sf-form ="accountCtrl.forms.account"
+        sf-model='accountCtrl.account')
     section.button-bar
-      button.btn.btn-warning(type='reset') Reset
+      button.btn.btn-warning(ng-click="accountCtrl.setAccount()") Reset
       button.btn.btn-info(type='submit') Submit
-  .account-values
-    strong(ng-click="static = !static; long=false;") Static Values&nbsp;
-      i.fa.fa-chevron-down(ng-if="static")
-      i.fa.fa-chevron-up(ng-if="!static")
-    strong(ng-click="long = !long; static=false;") Notes&nbsp;
-      i.fa.fa-chevron-down(ng-if="long")
-      i.fa.fa-chevron-up(ng-if="!long")
-  .static-values(ng-if="static")
-    small(ng-repeat="(key, val) in account.static")
-      strong {{key}}
-      br
-      |{{val}} &nbsp;
-  .long-values(ng-if="long")
-    small(ng-repeat="(key, val) in account.long")
-      strong {{key}}
-      br
-      |{{val}} &nbsp;
-
-
