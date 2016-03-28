@@ -1,6 +1,6 @@
 {
   "name": "revinue.account.management",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "dependencies": {
     "koa": "^1.2.0",
     "mysql": "^2.10.2"
